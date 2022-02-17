@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "524558097693",
+    "project_id": "fustal-dc7b1",
+    "storage_bucket": "fustal-dc7b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524558097693:android:6c29e0b6cb0deb137a15f4",
+        "android_client_info": {
+          "package_name": "com.example.fustal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524558097693-gmnq2mji77fma5d0geganvefmkedpr76.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fustal",
+            "certificate_hash": "c2341347d94bb2d6b1502d093130b38377f4c43b"
+          }
+        },
+        {
+          "client_id": "524558097693-nov5eomdpot1eo36n5opvb6tp4dgk5r6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQo7n5xi9vxLLpzAUGaSNIWdGeKSpOLQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524558097693-nov5eomdpot1eo36n5opvb6tp4dgk5r6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
