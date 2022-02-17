@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fustal/src/config/app_service.dart';
+import 'package:fustal/src/config/config.dart';
+import 'package:fustal/src/config/routes.dart';
 import 'package:fustal/src/constants/constants.dart';
-import 'package:fustal/src/pages/Home_Screen.dart';
+import 'package:fustal/src/pages/Home_screen.dart';
 import 'package:fustal/src/pages/Main_screen.dart';
+import 'package:fustal/src/pages/Sign_in_screen.dart';
 import 'package:fustal/src/providers/auth_provider.dart';
 import 'package:fustal/src/utils/Messenger.dart';
 import 'package:fustal/src/utils/app_name.dart';
@@ -74,51 +77,76 @@ class _BoardingscreenState extends State<Boardingscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Flexible(
-            child: Container(
-              child: Center(
-                child: Appname(fontsize: 35),
-              ),
-            ),
-            flex: 3,
-          ),
-          Flexible(
-            flex: 2,
-            child: Column(
-              children: [
-                RoundedLoadingButton(
-                  child: Wrap(
-                    // ignore: prefer_const_literals_to_create_immutables
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 280,
+                // color: Colors.grey.shade200,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        CupertinoIcons.game_controller,
-                        size: 25,
-                        color: Colors.white,
-                      ),
-                      spacer20,
-                      const Text(
-                        'Sign In with Google',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      )
+                      // Text("Welcome To ",
+                      //         style: TextStyle(
+                      //             fontSize: 22,
+                      //             fontWeight: FontWeight.w500,
+                      //             color:
+                      //                 Theme.of(context).secondaryHeaderColor),),
+                      Appname(fontsize: 35),
                     ],
                   ),
-                  controller: googlecontroller,
-                  onPressed: () => googlesigin(),
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  color: Colors.blueAccent,
-                  elevation: 0,
-                  //borderRadius: 3,
                 ),
-              ],
-            ),
+              ),
+              const Signinscreen(),
+              // spacer20,
+              RoundedLoadingButton(
+                child: Wrap(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    const Icon(
+                      CupertinoIcons.game_controller,
+                      size: 25,
+                      color: Colors.white,
+                    ),
+                    spacerw20,
+                    const Text(
+                      'Sign In with Google',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    )
+                  ],
+                ),
+                controller: googlecontroller,
+                onPressed: () => googlesigin(),
+                width: MediaQuery.of(context).size.width * 0.80,
+                color: Config().appcolor, elevation: 0,
+                //borderRadius: 3,
+              ),
+              spacer40,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Don't have an account ?"),
+                  spacerw10,
+                  InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, signuproute);
+                      },
+                      child: Text(
+                        "Create one",
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      )),
+                ],
+              ),
+              spacer40,
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

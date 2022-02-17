@@ -178,12 +178,35 @@ class Authprovider extends ChangeNotifier {
   Future aftersignout() async {
     await usersignout().then((value) {
       cleardata();
-      _isSignedIn= false;
-      
+      _isSignedIn = false;
     });
   }
-  cleardata()async{
-    SharedPreferences preferences= await SharedPreferences.getInstance();
+
+  cleardata() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
+  }
+
+  Future<int> getTotalUsersCount() async {
+    const String fieldName = 'count';
+    final DocumentReference ref =
+        firestore.collection('item_count').doc('users_count');
+    DocumentSnapshot snap = await ref.get();
+    if (snap.exists == true) {
+      int itemCount = snap[fieldName] ?? 0;
+      return itemCount;
+    } else {
+      await ref.set({fieldName: 0});
+      return 0;
+    }
+  }
+
+  Future usercount() async {
+    await getTotalUsersCount().then((value) async {
+      await firestore
+          .collection("item count")
+          .doc("user_count")
+          .update({"count": value + 1});
+    });
   }
 }
