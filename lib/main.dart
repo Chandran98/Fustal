@@ -2,17 +2,23 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fustal/src/config/routes.dart';
 import 'package:fustal/src/pages/Boarding_screen.dart';
+import 'package:fustal/src/pages/Main_screen.dart';
+import 'package:fustal/src/providers/Mainstoreproduct_provider.dart';
 import 'package:fustal/src/providers/auth_provider.dart';
+import 'package:fustal/src/providers/banners_provider.dart';
 import 'package:fustal/src/providers/theme_provider.dart';
+import 'package:fustal/src/providers/user_provider.dart';
 import 'package:fustal/src/themes/Themes.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => Themeprovider()),
-    ChangeNotifierProvider(create: (_) => Authprovider())
+    ChangeNotifierProvider(create: (_) => Authprovider()),
+    ChangeNotifierProvider(create: (_) => Bannerprovider()),
+    ChangeNotifierProvider(create: (_) => Mainstoresproductprovider())
   ], child: const MyApp()));
 }
 
@@ -27,7 +33,7 @@ class MyApp extends StatelessWidget {
       title: 'Fustal',
       theme:
           Provider.of<Themeprovider>(context).darktheme ? darkmode : lightmode,
-      home:  Boardingscreen(),
+      home: MainScreen(),
       routes: routes,
     );
   }

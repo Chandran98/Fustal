@@ -30,8 +30,9 @@ class _ForgetpasswordState extends State<Forgetpassword> {
       await auth.sendPasswordResetEmail(email: email);
       openDialog(context, 'Reset Password',
           'An email has been sent to $email. \n\nGo to that link & reset your password.');
+      emailcontroller.clear();
     } catch (errorcode) {
-      openSnacbar(scaffoldkey,errorcode.toString());
+      openSnacbar(scaffoldkey, errorcode.toString());
     }
   }
 
@@ -106,7 +107,8 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                           color: Theme.of(context).primaryColorLight),
                     ),
                     onPressed: () {
-handlesubmit();                    }),
+                      handlesubmit();
+                    }),
               ),
             ],
           ),

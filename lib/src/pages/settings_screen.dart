@@ -4,13 +4,25 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:fustal/src/config/config.dart';
 import 'package:fustal/src/constants/constants.dart';
 import 'package:fustal/src/pages/Boarding_screen.dart';
+import 'package:fustal/src/pages/edit_profile_screen.dart';
 import 'package:fustal/src/providers/auth_provider.dart';
 import 'package:fustal/src/providers/theme_provider.dart';
 import 'package:fustal/src/widgets/List_tile_widget.dart';
 import 'package:provider/provider.dart';
 
-class Settingscreen extends StatelessWidget {
+class Settingscreen extends StatefulWidget {
   const Settingscreen({Key? key}) : super(key: key);
+
+  @override
+  State<Settingscreen> createState() => _SettingscreenState();
+}
+
+class _SettingscreenState extends State<Settingscreen> {
+  @override
+  void initState() {
+    Userprofile();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,13 +140,20 @@ class Settingscreen extends StatelessWidget {
   }
 }
 
-class Userprofile extends StatelessWidget {
+class Userprofile extends StatefulWidget {
   const Userprofile({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<Userprofile> createState() => _UserprofileState();
+}
+
+class _UserprofileState extends State<Userprofile> {
+  String? name;
+  @override
   Widget build(BuildContext context) {
+    Authprovider authprovider = Provider.of<Authprovider>(context);
     return Column(
       children: [
         SizedBox(
@@ -145,15 +164,16 @@ class Userprofile extends StatelessWidget {
                 backgroundColor: Colors.grey.shade500,
               ),
               spacer20,
-              const Text(
-                "data",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              Text(
+                authprovider.name.toString(),
+                // name== null?  authprovider.name.toString():"Name",
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
             ],
           ),
         ),
         Listtilewidget(
-          title: "Email@gamil.com",
+          title: authprovider.email.toString(),
           color: Colors.deepPurpleAccent,
           icon: FeatherIcons.mail,
           ontap: () {},
@@ -161,7 +181,10 @@ class Userprofile extends StatelessWidget {
         Listtilewidget(
             title: "Edit profile",
             color: Colors.blueAccent,
-            ontap: () {},
+            ontap: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => Editprofilescreen()));
+            },
             icon: FeatherIcons.edit3),
         Listtilewidget(
             title: "Log out",
