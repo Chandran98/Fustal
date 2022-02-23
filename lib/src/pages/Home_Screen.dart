@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fustal/src/constants/constants.dart';
 import 'package:fustal/src/themes/Themes.dart';
 import 'package:fustal/src/utils/app_name.dart';
+import 'package:fustal/src/widgets/banners/banner_plate.dart';
 import 'package:fustal/src/widgets/title_board.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 25, right: 25, top: 50),
-      child: Column(
+      child: Column( 
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -30,7 +31,8 @@ class HomeScreen extends StatelessWidget {
           ),spacer20,
           // Titleboard(),
           Appname(fontsize: 40
-          )
+          ),
+          Bannerplate()
         ],
       ),
     );

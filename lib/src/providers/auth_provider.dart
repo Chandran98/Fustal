@@ -86,6 +86,18 @@ class Authprovider extends ChangeNotifier {
     }
   }
 
+  Future updateuser( newname,newimageurl)async{
+    firestore.collection("users").doc(uid).update({
+      "name":newname,
+      "imageurl":newimageurl,
+    });
+    SharedPreferences preferences =await SharedPreferences.getInstance();
+    preferences.setString("name",newname);
+    preferences.setString("imageurl",newimageurl);
+    _name =newname;
+    _image=newimageurl;
+  }
+
   Future<bool> checkuserexists() async {
     final DocumentSnapshot snapshot =
         await firestore.collection("users").doc(_uid).get();
