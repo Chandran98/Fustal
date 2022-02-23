@@ -52,6 +52,8 @@ class _SigninscreenState extends State<Signinscreen> {
                           signinCompleted = true;
                         });
                         Navigator.pushNamed(context, mainscreenroute);
+                        _emailcontroller.clear();
+                        _passwordcontroller.clear();
                       }));
             } else {
               setState(() {
@@ -126,7 +128,9 @@ class _SigninscreenState extends State<Signinscreen> {
             Container(
               alignment: Alignment.centerRight,
               child: TextButton(
-                  onPressed: () {Navigator.pushNamed(context, forgotpasswordroute);},
+                  onPressed: () {
+                    Navigator.pushNamed(context, forgotpasswordroute);
+                  },
                   child: Text(
                     'forgot password?',
                     style: TextStyle(color: Theme.of(context).primaryColor),

@@ -11,11 +11,13 @@ const spacer10 = SizedBox(height: 10);
 const spacer20 = SizedBox(height: 20);
 const spacer30 = SizedBox(height: 30);
 const spacer40 = SizedBox(height: 40);
+const spacer50 = SizedBox(height: 50);
 
 const spacerw10 = SizedBox(width: 10);
 const spacerw20 = SizedBox(width: 20);
 const spacerw30 = SizedBox(width: 30);
 const spacerw40 = SizedBox(width: 40);
+const spacerw50 = SizedBox(width: 50);
 
 // colors  //
 

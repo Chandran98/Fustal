@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fustal/src/config/app_service.dart';
+import 'package:fustal/src/config/config.dart';
 import 'package:fustal/src/config/routes.dart';
 import 'package:fustal/src/constants/constants.dart';
 import 'package:fustal/src/providers/auth_provider.dart';
@@ -15,15 +16,15 @@ class Signupscreen extends StatefulWidget {
 }
 
 class _SignupscreenState extends State<Signupscreen> {
-  final GlobalKey _scaffoldkey = GlobalKey<ScaffoldState>();
+  // final GlobalKey _scaffoldkey = GlobalKey<ScaffoldState>();
   final formkey = GlobalKey<FormState>();
 
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passwordcontroller = TextEditingController();
   final TextEditingController _namecontroller = TextEditingController();
-   String? name;
-   String? email;
-   String? password;
+String? name;
+String? email;
+String? password;
 
   bool signUpStarted = false;
   bool signUpCompleted = false;
@@ -37,7 +38,7 @@ class _SignupscreenState extends State<Signupscreen> {
       formkey.currentState!.save();
       await Appservice().connection().then((internet) {
         if (internet == false) {
-          openSnacbar(_scaffoldkey, "No internet");
+          shortmessenger(context, "No Internet connection");
         }
       });
     } else {
@@ -58,6 +59,9 @@ class _SignupscreenState extends State<Signupscreen> {
                         signUpStarted = true;
                       });
                       Navigator.pushNamed(context, mainscreenroute);
+                      _emailcontroller.clear();
+                      _passwordcontroller.clear();
+                      _namecontroller.clear();
                     })
                 // )
                 );
@@ -65,7 +69,8 @@ class _SignupscreenState extends State<Signupscreen> {
         setState(() {
           signUpStarted = false;
         });
-        openSnacbar(_scaffoldkey, authprovider.errorcode);
+        // openSnacbar(_scaffoldkey, );
+        shortmessenger(context, authprovider.errorcode);
       }
     });
   }
@@ -74,7 +79,7 @@ class _SignupscreenState extends State<Signupscreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        key: _scaffoldkey,
+        // key: _scaffoldkey,
         body: Form(
           key: formkey,
           child: Padding(
@@ -179,38 +184,56 @@ class _SignupscreenState extends State<Signupscreen> {
                       });
                     },
                   ),
-                  SizedBox(
-                    height: 50,
-                  ),
+                  spacer50,
+                  InkWell(
+                    onTap: () {
+                      singupwithemailpassword();
+                    },
+                    borderRadius: BorderRadius.circular(0),
+                    child: Container(
+                      height: 50,
+                      width: 320,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Config().appcolor),
 
-                  SizedBox(
-                    height: 45,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.resolveWith(
-                                (states) => Theme.of(context).primaryColor)),
-                        child: signUpStarted == false
-                            ? Text(
-                                'sign up',
+                      // style: ButtonStyle(
+                      //     backgroundColor: MaterialStateProperty.resolveWith(
+                      //         (states) => Theme.of(context).primaryColor)),
+                      child: signUpStarted == false
+                          ? const Center(
+                              child: Text(
+                                'Sign up',
                                 style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
-                              )
-                            : signUpCompleted == false
-                                ? CircularProgressIndicator(
-                                    backgroundColor: Colors.white)
-                                : Text('sign up successful!',
-                                    style: TextStyle(
-                                        fontSize: 16, color: Colors.white)),
-                        onPressed: () {
-                          singupwithemailpassword();
-                        }),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                            )
+                          : signUpStarted == false
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                    backgroundColor: Colors.transparent,
+                                    color: white,
+                                  ),
+                                )
+                              : const Center(
+                                  child: Text('Sign in successful!',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white)),
+                                ),
+                      // onPressed: () {
+                      //   // singupwithemailpassword();
+                      // }
+                    ),
                   ),
                   spacer10,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('already have an account?'),
+                      const Text('already have an account?'),
                       TextButton(
                         child: Text(
                           'sign in',
@@ -223,7 +246,7 @@ class _SignupscreenState extends State<Signupscreen> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                 ],

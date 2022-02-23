@@ -29,12 +29,15 @@ class _BoardingscreenState extends State<Boardingscreen> {
         Provider.of<Authprovider>(context, listen: false);
     await Appservice().connection().then((hasinternet) async {
       if (hasinternet == false) {
-        openSnacbar(scaffoldkey, "Check your Internet connection");
+        shortmessenger(context, "No Internet connection");
       } else {
         await authprovider.openaccountwithgoogle().then((_) {
           if (authprovider.haserror == true) {
-            openSnacbar(scaffoldkey, "Something went wrong.Please try again");
             googlecontroller.reset();
+
+            shortmessenger(context, "Something went wrong.Please try again");
+
+            // openSnacbar(scaffoldkey, "Something went wrong.Please try again");
           } else {
             authprovider.checkuserexists().then((value) {
               if (value == true) {

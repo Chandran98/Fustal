@@ -37,6 +37,15 @@ dependencies:
   firebase_analytics:
   intl:
   rounded_loading_button:
+  image_picker:
+  path_provider:
+  url_launcher:
+  badges:
+  cached_network_image:
+  dots_indicator:
+  skeleton_text:
+  # google_fonts:
+  # share:
 
 
 dev_dependencies:
